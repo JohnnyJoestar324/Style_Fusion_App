@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-StyleFusionApplication<style_fusion>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.martinezjohnny324.style_fusion.StyleFusionApplication",
+            "projectName": "style_fusion",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

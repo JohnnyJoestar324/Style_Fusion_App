@@ -1,4 +1,4 @@
-package com.martinezjohnny324.models;
+package com.martinezjohnny324.style_fusion.models;
 
 import jakarta.persistence.*;
 
