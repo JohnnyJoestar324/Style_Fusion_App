@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Registrar nuevo cliente</h2>
-    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post"> 
+    <form th:action="@{/cliente/guardar}" th:object="${cliente}" method="post"> 
         <label>Nombre:</label>
         <input type="text" th:field="*{nombre}" required><br>
         
