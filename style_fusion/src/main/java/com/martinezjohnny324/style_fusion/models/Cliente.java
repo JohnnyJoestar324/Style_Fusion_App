@@ -23,6 +23,11 @@ public class Cliente {
     @JoinColumn(name = "membresia_id", nullable = false)
     private Membresia membresia;
 
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private Users user; 
+
+
     // 🔹 Constructor vacío (requerido por JPA)
     public Cliente() {
     }
@@ -70,5 +75,13 @@ public class Cliente {
 
     public void setMembresia(Membresia membresia) {
         this.membresia = membresia;
+    }
+
+    public Users getUser() {
+    return user;
+    }
+
+    public void setUser(Users user) {
+    this.user = user;
     }
 }

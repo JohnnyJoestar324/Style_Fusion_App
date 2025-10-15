@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <h2>Bienvenido a Style Fusion</h2>
+    <form th:action="@{/login}" method="post">
+        
+        <label>Usuario:</label>
+        <input type="text" name="username" required><br>
+
+        <label>Contraseña:</label>
+        <input type="password" name="password" required><br>
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <button type="submit">Iniciar sesión</button>
+    </form>
+    
+    <div th:if="${param.error}" style="color: red;">
+        Credenciales incorrectas.
+    </div>
+
+</body>
+</html>
