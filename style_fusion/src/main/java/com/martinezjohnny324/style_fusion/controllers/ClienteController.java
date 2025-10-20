@@ -22,6 +22,15 @@ public class ClienteController {
         this.membresiaService = membresiaService;
     }
 
+
+    // Mostrar el home de Clientes
+    @GetMapping("")
+    public String HomeView(){
+
+        return "cliente/home_cliente";
+    }
+
+
     // 1. Mostrar lista de clientes (Endpoint /clientes/total_clientes)
     @GetMapping("/total_clientes")
     public String obtenerTotalClientes(Model model) { // Debe devolver String para la vista
