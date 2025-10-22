@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Cliente</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Eliminar Cliente</h2>
+    <p>¿Estás seguro de que deseas eliminar al cliente <strong th:text="${cliente.nombre}"></strong>?</p>
+
+    <form action="/cliente/eliminar/{{cliente.id}}" method="get">
+        <input type="hidden" name="id" th:value="${cliente.id}" />
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a th:href="@{/cliente/total_clientes}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

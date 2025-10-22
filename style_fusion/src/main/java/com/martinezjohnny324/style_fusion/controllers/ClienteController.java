@@ -1,6 +1,8 @@
 package com.martinezjohnny324.style_fusion.controllers;
 
 import com.martinezjohnny324.style_fusion.models.Cliente;
+import com.martinezjohnny324.style_fusion.models.Users;
+import com.martinezjohnny324.style_fusion.repositories.UserRepository;
 import com.martinezjohnny324.style_fusion.services.ClienteService;
 import com.martinezjohnny324.style_fusion.services.MembresiaService;
 
@@ -15,11 +17,13 @@ public class ClienteController {
 
     private final ClienteService clienteService;
     private final MembresiaService membresiaService;
+    private final UserRepository userRepository;
 
     // Constructor con inyección
-     public  ClienteController(ClienteService clienteService, MembresiaService membresiaService) {
+     public  ClienteController(ClienteService clienteService, MembresiaService membresiaService, UserRepository userRepository) {
         this.clienteService = clienteService;
         this.membresiaService = membresiaService;
+        this.userRepository = userRepository;
     }
 
 
@@ -51,4 +55,20 @@ public class ClienteController {
         clienteService.guardarCliente(cliente);
         return "redirect:/cliente/total_clientes"; // Redirecciona después de guardar
     }
+ // ✅ Eliminar directamente desde la tabla
+    @PostMapping("/eliminar/{id}")
+    public String eliminarClienteDirecto(@PathVariable("id") Long id) {
+        Cliente cliente = clienteService.obtenerClientePorId(id);
+
+        if (cliente != null) {
+            Users user = cliente.getUser();
+            if (user != null) {
+                userRepository.delete(user);
+            }
+            clienteService.borrarCliente(id);
+        }
+
+        return "redirect:/cliente/total_clientes";
+    }
+    
 }
