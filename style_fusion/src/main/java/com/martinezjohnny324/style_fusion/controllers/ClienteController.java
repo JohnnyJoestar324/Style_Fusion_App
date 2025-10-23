@@ -70,5 +70,52 @@ public class ClienteController {
 
         return "redirect:/cliente/total_clientes";
     }
-    
+
+
+
+    @GetMapping("/editar/{id}")
+public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
+    Cliente cliente = clienteService.obtenerClientePorId(id);
+    if (cliente == null) {
+        throw new RuntimeException("Cliente no encontrado con ID: " + id);
+    }
+
+    model.addAttribute("cliente", cliente);
+    model.addAttribute("membresias", membresiaService.listarMembresias());
+    return "cliente/editar"; // nombre del HTML del formulario de edición
 }
+    
+
+@PostMapping("/editar")
+    public String editarCliente(@ModelAttribute("cliente") Cliente cliente,
+                                @RequestParam(value = "membresiaId", required = false) Long membresiaId) {
+
+        if (cliente.getId() == null) {
+            throw new IllegalArgumentException("El ID del cliente no puede ser nulo.");
+        }
+
+        // Buscar cliente existente
+        Cliente clienteExistente = clienteService.obtenerClientePorId(cliente.getId());
+        if (clienteExistente == null) {
+            throw new RuntimeException("Cliente no encontrado con ID: " + cliente.getId());
+        }
+
+        // Actualizar campos
+        clienteExistente.setId(cliente.getId());
+        clienteExistente.setNombre(cliente.getNombre());
+        clienteExistente.setApellido(cliente.getApellido());
+        clienteExistente.setEmail(cliente.getEmail());
+
+        // Actualizar membresía si se envió
+        if (membresiaId != null) {
+            var membresia = membresiaService.obtenerMembresiaPorId(membresiaId);
+            clienteExistente.setMembresia(membresia);
+        }
+
+        clienteService.guardarCliente(clienteExistente);
+        return "redirect:/cliente/total_clientes";
+    }
+
+
+    
+}   

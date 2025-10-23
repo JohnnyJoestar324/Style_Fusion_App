@@ -14,6 +14,11 @@ public class MembresiaService {
     @Autowired
     private MembresiaRepository membresiaRepository;
 
+    public Membresia obtenerMembresiaPorId(Long id) {
+    return membresiaRepository.findById(id).orElse(null);
+}
+
+
     public List<Membresia> listarMembresias() {
         return membresiaRepository.findAll();
     }

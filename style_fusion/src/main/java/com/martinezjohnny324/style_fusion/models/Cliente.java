@@ -84,4 +84,10 @@ public class Cliente {
     public void setUser(Users user) {
     this.user = user;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
 }
