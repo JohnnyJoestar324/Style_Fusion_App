@@ -21,7 +21,7 @@ public class DataLoader {
     public CommandLineRunner initDatabase(
         UserRepository usersRepository, 
         PasswordEncoder passwordEncoder,
-        MembresiaRepository membresiaRepository) { // ⬅️ INYECTADO
+        MembresiaRepository membresiaRepository) { 
         
         return args -> {
             
@@ -37,10 +37,10 @@ public class DataLoader {
                     "ROLE_ADMIN" 
                 );
                 usersRepository.save(admin);
-                log.info("✅ Administrador inicial creado.");
+                log.info(" Administrador inicial creado.");
                 log.info("   Usuario: admin | Contraseña: admin123 | Rol: ADMIN");
             } else {
-                log.info("ℹ️ El administrador ya existe. Omitiendo creación.");
+                log.info(" El administrador ya existe. Omitiendo creación.");
             }
 
             // ==========================================================
@@ -66,9 +66,9 @@ public class DataLoader {
                 // Guardar los 3 planes en la base de datos
                 membresiaRepository.saveAll(List.of(basica, profesional, premium));
                 
-                log.info("✅ Membresías predeterminadas cargadas: Básico ($10), Profesional ($20), Premium ($25).");
+                log.info(" Membresías predeterminadas cargadas: Básico ($10), Profesional ($20), Premium ($25).");
             } else {
-                log.info("ℹ️ Membresías ya existentes. Omitiendo carga de planes.");
+                log.info("Membresías ya existentes. Omitiendo carga de planes.");
             }
         };
     }
