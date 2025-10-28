@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping("/")
+    @RequestMapping("/") // redirige al administrador al login
     public String home() {
         return "redirect:/login"; 
     }
@@ -31,9 +31,9 @@ public class HomeController {
     }
 
     //home principal de los clientes de Style Fusion
-    @GetMapping("/home_barbero")
+    @GetMapping("/home_negocio")
     public String homeBarbero() {  
-        return "main/home_barbero";
+        return "main/home_negocio";
     }
 
 }

@@ -1,11 +1,20 @@
 package com.martinezjohnny324.style_fusion.config;
 
 import org.springframework.context.annotation.Bean;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.io.IOException;
+import java.util.Collection;
 
 @Configuration
 public class SecurityConfig {
@@ -27,9 +36,29 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/login")                    // Página de inicio de sesión
-                .loginProcessingUrl("/login")           // Donde se procesa el formulario POST
-                .defaultSuccessUrl("/home", true) // A dónde va tras iniciar sesión
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                // 🔹 Handler directamente aquí:
+                .successHandler((HttpServletRequest request, HttpServletResponse response, Authentication authentication) -> {
+                    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+                    String redirectURL = request.getContextPath();
+
+                    for (GrantedAuthority auth : authorities) {
+                        String role = auth.getAuthority();
+                        if (role.equals("ROLE_ADMIN")) {
+                            redirectURL = "/home";
+                            break;
+                        } else if (role.equals("ROLE_CLIENTE")) {
+                            redirectURL = "/home_negocio";
+                            break;
+                        } else if (role.equals("ROLE_BARBERO")) {
+                            redirectURL = "/home_barbero";
+                            break;
+                        }
+                    }
+
+                    response.sendRedirect(redirectURL);
+                })
                 .permitAll()
             )
             .logout(logout -> logout
