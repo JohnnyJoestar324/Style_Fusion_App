@@ -20,9 +20,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth", "/login/**", "/css/**", "/js/**").permitAll() // acceso libre
+                .requestMatchers("/auth","/auth/registro", "/login/**", "/css/**", "/js/**").permitAll() // acceso libre
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/cliente/**").hasAnyRole("ADMIN", "CLIENTE")
+                .requestMatchers("/barbero/**").hasAnyRole("CLIENTE") // Acceso solo para los clientes de Style Fusion
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form

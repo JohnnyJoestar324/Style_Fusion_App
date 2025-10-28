@@ -21,10 +21,10 @@ private String Nombre;
 @Column(nullable = false)
 private String Apellido;   
 @Column(nullable = false, unique = true)
-private int Numero;
+private Long Numero;
 
 
-    public Barbero(String nombre, String apellido, int numero) {
+    public Barbero(String nombre, String apellido, Long numero) {
     Nombre = nombre;
     Apellido = apellido;
     Numero = numero;
@@ -50,11 +50,11 @@ private int Numero;
         Apellido = apellido;
     }
 
-    public int getNumero() {
+    public Long getNumero() {
         return Numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Long numero) {
         Numero = numero;
     }
 

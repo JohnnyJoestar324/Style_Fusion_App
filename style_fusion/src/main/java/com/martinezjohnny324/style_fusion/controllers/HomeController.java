@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+
 @Controller
 public class HomeController {
 
@@ -17,6 +18,9 @@ public class HomeController {
     public String showLogin() {
         return "login/login"; 
     }
+
+    
+    
 // ... dentro de HomeController ...
 
     // 3. Mapea la ruta de éxito tras el login (por ejemplo, /home o /dashboard)
@@ -25,6 +29,13 @@ public class HomeController {
         // Esto resuelve a src/main/resources/templates/main/home.html
         return "main/home"; 
     }
+
+    //home principal de los clientes de Style Fusion
+    @GetMapping("/home_barbero")
+    public String homeBarbero() {  
+        return "main/home_barbero";
+    }
+
 }
 
 

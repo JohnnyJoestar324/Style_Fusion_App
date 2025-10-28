@@ -1,6 +1,5 @@
 package com.martinezjohnny324.style_fusion.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.martinezjohnny324.style_fusion.models.Barbero;
+import com.martinezjohnny324.style_fusion.repositories.BarberoRepository;
 import com.martinezjohnny324.style_fusion.services.BarberoService;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -18,16 +18,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/barbero")
 public class BarberoController {
 
-private  final Barbero barbero;
+private  final BarberoRepository barberoRepository;
 private  final BarberoService barberoService;
 
 
-    public BarberoController (Barbero barbero, BarberoService barberoService){
-        this.barbero = barbero;
+    public BarberoController (BarberoRepository barberoRepository, BarberoService barberoService){
+        this.barberoRepository = barberoRepository;
         this.barberoService = barberoService;
 
 
     }
+
+    //Página principal del cliente de Style Fusion
+    
 
     //vista añadir barbero
     @GetMapping("nuevo")
