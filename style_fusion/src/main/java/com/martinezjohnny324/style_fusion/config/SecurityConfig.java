@@ -38,7 +38,6 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                // 🔹 Handler directamente aquí:
                 .successHandler((HttpServletRequest request, HttpServletResponse response, Authentication authentication) -> {
                     Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
                     String redirectURL = request.getContextPath();
@@ -51,9 +50,7 @@ public class SecurityConfig {
                         } else if (role.equals("ROLE_CLIENTE")) {
                             redirectURL = "/home_negocio";
                             break;
-                        } else if (role.equals("ROLE_BARBERO")) {
-                            redirectURL = "/home_barbero";
-                            break;
+                        
                         }
                     }
 

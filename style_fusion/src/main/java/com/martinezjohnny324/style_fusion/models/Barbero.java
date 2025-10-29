@@ -62,6 +62,10 @@ private Long Numero;
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     
 

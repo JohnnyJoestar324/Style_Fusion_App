@@ -1,11 +1,13 @@
 package com.martinezjohnny324.style_fusion.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.martinezjohnny324.style_fusion.models.Barbero;
+import com.martinezjohnny324.style_fusion.models.Cliente;
 import com.martinezjohnny324.style_fusion.repositories.BarberoRepository;
 
 @Service
@@ -36,9 +38,11 @@ private BarberoRepository barberoRepository;
 
      //Eliminar barbero
 
-        public void eliminarBarbero(Long id){
-            barberoRepository.deleteById(id);
-        }
+    public Optional<Barbero> borrarBarbero(Long id) {
+    Optional<Barbero> barbero = barberoRepository.findById(id);
+    barbero.ifPresent(c -> barberoRepository.delete(c)); // borra solo si existe
+    return barbero; // devuelve el Optional, puede estar vacío si no existe
+}
     
 
 
