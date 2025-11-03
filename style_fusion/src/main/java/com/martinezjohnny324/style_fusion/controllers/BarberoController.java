@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.martinezjohnny324.style_fusion.models.Barbero;
-import com.martinezjohnny324.style_fusion.repositories.BarberoRepository;
 import com.martinezjohnny324.style_fusion.services.BarberoService;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -19,12 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequestMapping("/barbero")
 public class BarberoController {
 
-private  final BarberoRepository barberoRepository;
 private  final BarberoService barberoService;
 
 
-    public BarberoController (BarberoRepository barberoRepository, BarberoService barberoService){
-        this.barberoRepository = barberoRepository;
+    public BarberoController ( BarberoService barberoService){
         this.barberoService = barberoService;
 
 
@@ -38,7 +35,7 @@ private  final BarberoService barberoService;
     
 
     //vista añadir barbero
-    @GetMapping("nuevo")
+    @GetMapping("/nuevo")
     public String crearBarbero(Model model ) {
         model.addAttribute("barbero", new Barbero());
 
@@ -60,7 +57,7 @@ private  final BarberoService barberoService;
     @PostMapping("guardar")
     public String guardarBarbero(@ModelAttribute("barbero") Barbero barbero){
          barberoService.guardarBarbero(barbero);
-         return "redirect:barbero/hombe_barbero";
+         return "redirect:/barbero";
    }
 
 
@@ -109,7 +106,7 @@ private  final BarberoService barberoService;
         
 
         barberoService.guardarBarbero(barberoExistente);
-        return "redirect:/cliente/total_clientes";
+        return "redirect:/barbero/total_barberos";
     }
 
 
