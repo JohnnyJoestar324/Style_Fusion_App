@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.martinezjohnny324.style_fusion.models.Barbero;
 
@@ -60,5 +61,45 @@ public class ClienteBarberoController {
         return "cliente-barbero/total_clientes_barbero";
 
     }
+
+
+
+    //Eliminar cliente barbero
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarClienteBarbero(@PathVariable("id") Long id){
+        clienteBarberoService.eliminarClienteBarbero(id);
+        return "redirect:/cliente-barbero/total_clientes_barbero";
+    }
+    
+    @GetMapping("/editar/{id}")
+public String editarBarbero(@PathVariable("id") Long id, Model model) {
+    ClienteBarbero clienteBarbero = clienteBarberoService.encontrarID(id);
+    if (clienteBarbero == null) {
+        throw new RuntimeException("Cliente no encontrado con ID: " + id);
+    }
+    model.addAttribute("clienteBarbero", clienteBarbero);
+    return "cliente-barbero/editar";
+}
+
+@PostMapping("/editar")
+public String editarCliente(@ModelAttribute("clienteBarbero") ClienteBarbero clienteBarbero) {
+    if (clienteBarbero.getId() == null) {
+        throw new IllegalArgumentException("El ID del cliente no puede ser nulo.");
+    }
+
+    ClienteBarbero clienteExistente = clienteBarberoService.encontrarID(clienteBarbero.getId());
+    if (clienteExistente == null) {
+        throw new RuntimeException("Cliente no encontrado con ID: " + clienteBarbero.getId());
+    }
+
+    clienteExistente.setNombre(clienteBarbero.getNombre());
+    clienteExistente.setApellido(clienteBarbero.getApellido());
+    clienteExistente.setNumero(clienteBarbero.getNumero());
+
+    clienteBarberoService.guardar(clienteExistente);
+    return "redirect:/cliente-barbero/total_clientes_barbero";
+}
+
 
 }

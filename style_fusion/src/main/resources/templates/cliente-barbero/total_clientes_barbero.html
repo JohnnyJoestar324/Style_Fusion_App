@@ -48,9 +48,9 @@
                                     <td th:text="${cliente.apellido}"></td>
                                     <td th:text="${cliente.numero}"></td>
                                     <td>
-                                            <a th:href="@{'/cliente/editar/' + ${cliente.id}}">Editar</a> |
-                                              <form th:action="@{'/cliente/eliminar/' + ${cliente.id}}" method="post" style="display:inline;">
-                                       <form th:action="@{/cliente/eliminar/{id}(id=${cliente.id})}" method="post" style="display:inline;">
+                                            <a th:href="@{'/cliente-barbero/editar/' + ${cliente.id}}">Editar</a> |
+                                              <form th:action="@{'/cliente-barbero/eliminar/' + ${cliente.id}}" method="post" style="display:inline;">
+                                       <form th:action="@{/cliente-barbero/eliminar/{id}(id=${cliente.id})}" method="post" style="display:inline;">
                                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                      th:onclick="'return confirm(\'¿Está seguro de que desea eliminar este cliente?\');'">

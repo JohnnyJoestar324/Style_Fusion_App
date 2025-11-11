@@ -36,20 +36,20 @@
                             <input type="text" th:field="*{apellido}" id="apellido" class="form-control" placeholder="Ingresa el apellido" required>
                         </div>
 
-                          <div class="mb-3">
-                             <label for="numero" class="form-label">Número:</label>
-                                 <input type="text"
-                                 th:field="*{numero}"
-                                 id="numero"
-                                class="form-control"
-                                placeholder="77349087"
-                                pattern="^[0-9]{8}$"
-                                maxlength="8"
-                                inputmode="numeric"
-                                required
-                                oninvalid="this.setCustomValidity('Debe ingresar un número telefónico de 8 dígitos')"
-                                oninput="this.setCustomValidity('')">
-                            </div>
+                              <div class="mb-3">
+    <label for="numero" class="form-label">Número:</label>
+         <input type="text"
+           th:field="*{Numero}"
+           id="numero"
+           class="form-control"
+           placeholder="77349087"
+           pattern="^[0-9]{8}$"
+           maxlength="8"
+           inputmode="numeric"
+           required
+           oninvalid="this.setCustomValidity('Debe ingresar un número telefónico de 8 dígitos')"
+           oninput="this.setCustomValidity('')">
+</div>
 
 
                         <div class="d-grid">

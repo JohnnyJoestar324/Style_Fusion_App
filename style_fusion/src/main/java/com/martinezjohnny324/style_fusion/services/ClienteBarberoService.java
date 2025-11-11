@@ -27,6 +27,18 @@ public class ClienteBarberoService {
         return clienteBarberoRepository.findAll();
     }
 
+    //obteber por id
+
+    public ClienteBarbero encontrarID(Long id){
+        return clienteBarberoRepository.findById(id).orElse(null);
+    }
+
+
+    //eliminar cliente barbero
+    public void eliminarClienteBarbero(Long id){
+        clienteBarberoRepository.deleteById(id);
+    }
+
 
 
 
