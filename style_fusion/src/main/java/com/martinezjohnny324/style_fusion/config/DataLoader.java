@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.List; 
+import java.util.Arrays;
+
 
 @Configuration
 public class DataLoader {
@@ -63,8 +64,9 @@ public class DataLoader {
                 premium.setPrecio(25.00);
                 premium.setDescripcion("Acceso completo y soporte prioritario.");
                 
+                
                 // Guardar los 3 planes en la base de datos
-                membresiaRepository.saveAll(List.of(basica, profesional, premium));
+                membresiaRepository.saveAll(Arrays.asList(basica, profesional, premium));
                 
                 log.info(" Membresías predeterminadas cargadas: Básico ($10), Profesional ($20), Premium ($25).");
             } else {

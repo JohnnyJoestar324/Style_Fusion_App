@@ -22,7 +22,7 @@ public class Users {
     @Column(unique = true)
     private String email;
     private String password;
-    private String role;
+    private String role; 
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -30,8 +30,7 @@ public class Users {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cliente cliente;
     
-    public Users() {
-    }
+   
 
     public Users(String name, String username, String email, String password, String role) {
         this.name = name;
@@ -39,6 +38,21 @@ public class Users {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+     public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Users() {
     }
 
      public Long getId() {

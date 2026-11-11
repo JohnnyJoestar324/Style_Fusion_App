@@ -5,7 +5,6 @@ import com.martinezjohnny324.style_fusion.models.Users;
 import com.martinezjohnny324.style_fusion.repositories.UserRepository;
 import com.martinezjohnny324.style_fusion.services.ClienteService;
 import com.martinezjohnny324.style_fusion.services.MembresiaService;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +54,7 @@ public class ClienteController {
         clienteService.guardarCliente(cliente);
         return "redirect:/cliente/total_clientes"; // Redirecciona después de guardar
     }
- // ✅ Eliminar directamente desde la tabla
+ // Eliminar directamente desde la tabla
     @PostMapping("/eliminar/{id}")
     public String eliminarClienteDirecto(@PathVariable("id") Long id) {
         Cliente cliente = clienteService.obtenerClientePorId(id);

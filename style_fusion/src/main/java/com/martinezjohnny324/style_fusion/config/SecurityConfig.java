@@ -1,10 +1,8 @@
 package com.martinezjohnny324.style_fusion.config;
 
 import org.springframework.context.annotation.Bean;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth","/auth/registro", "/login/**", "/css/**", "/js/**").permitAll() // acceso libre
+                .requestMatchers("/images/**","/auth","/auth/registro", "/login/**", "/css/**", "/js/**").permitAll() // acceso libre
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/cliente/**").hasAnyRole("ADMIN", "CLIENTE")
                 .requestMatchers("/barbero/**").hasAnyRole("CLIENTE") // Acceso solo para los clientes de Style Fusion

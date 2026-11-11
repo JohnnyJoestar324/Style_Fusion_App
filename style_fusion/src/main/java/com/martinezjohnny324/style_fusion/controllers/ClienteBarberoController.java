@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.martinezjohnny324.style_fusion.models.Barbero;
-
 import com.martinezjohnny324.style_fusion.models.ClienteBarbero;
 import com.martinezjohnny324.style_fusion.services.ClienteBarberoService;
-
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 

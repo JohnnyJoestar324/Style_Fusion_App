@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-
 import java.util.Collections;
 
 @Service // Esto lo registra como un bean de Spring
@@ -34,6 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             Collections.singletonList(new SimpleGrantedAuthority(user.getRole()))
         );
     }
+
+    
 
    
 

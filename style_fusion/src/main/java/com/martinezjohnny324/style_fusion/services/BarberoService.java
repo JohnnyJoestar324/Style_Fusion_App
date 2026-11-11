@@ -2,12 +2,9 @@ package com.martinezjohnny324.style_fusion.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.martinezjohnny324.style_fusion.models.Barbero;
-import com.martinezjohnny324.style_fusion.models.Cliente;
 import com.martinezjohnny324.style_fusion.repositories.BarberoRepository;
 
 @Service
