@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.martinezjohnny324.style_fusion.models.Cliente;
+import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
+import com.martinezjohnny324.style_fusion.models.mapper.Mapper;
 import com.martinezjohnny324.style_fusion.repositories.ClienteRepository;
 
 @Service
@@ -20,13 +22,20 @@ public class ClienteService {
 
 
 
-    public Cliente guardarCliente(Cliente cliente){
-        return clienteRepository.save(cliente);
+    public ClienteDto guardarCliente(ClienteDto cDto){
+        Mapper mp = new Mapper();
+        Cliente c = mp.DtoToEntity(cDto);
+        Cliente c_save = clienteRepository.save(c);
+        return mp.EntityToDto(c_save);
     }
 
 
-    public Cliente obtenerClientePorId(Long id) {
-    return clienteRepository.findById(id).orElse(null);
+    public ClienteDto obtenerClientePorId(Long id) {
+     Mapper mp = new Mapper();
+     Cliente c = clienteRepository.findById(id).orElse(null);
+     ClienteDto cdDto = mp.EntityToDto(c);
+     return cdDto;
+
 }
 
 

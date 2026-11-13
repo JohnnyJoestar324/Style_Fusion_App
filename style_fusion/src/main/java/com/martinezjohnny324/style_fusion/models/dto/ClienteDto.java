@@ -1,5 +1,7 @@
 package com.martinezjohnny324.style_fusion.models.dto;
 
+import com.martinezjohnny324.style_fusion.models.Users;
+
 public class ClienteDto {
 
     private Long id;
@@ -7,7 +9,21 @@ public class ClienteDto {
     private String apellido;
     private String email;
     private MembresiaDto mDto;
+    private Users users;
 
+    
+
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public ClienteDto() {
+    }
 
     public MembresiaDto getmDto() {
         return mDto;
