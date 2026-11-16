@@ -11,29 +11,7 @@ import java.util.stream.Collectors;
 
 public class Mapper {
 
-    public ClienteDto EntityToDto(Cliente cliente){
-        ClienteDto cDto = new ClienteDto();
-        cDto.setId(cliente.getId());
-        cDto.setNombre(cliente.getNombre());
-        cDto.setApellido(cliente.getApellido());
-        cDto.setEmail(cliente.getEmail());
-
-        return  cDto;
-
-    }
-
-    public Cliente DtoToEntity(ClienteDto cDto){
-        Cliente c = new Cliente();
-        c.setId(cDto.getId());
-        c.setNombre(cDto.getNombre());
-        c.setApellido(cDto.getApellido());
-        c.setEmail(cDto.getEmail());
-
-        return c;
-    }
-
-
-    public MembresiaDto EntityToDto(Membresia memb){
+        public MembresiaDto EntityToDto(Membresia memb){
         MembresiaDto mDto = new MembresiaDto();
         mDto.setId(memb.getId());
         mDto.setNombrePlan(memb.getNombrePlan());
@@ -60,6 +38,34 @@ public class Mapper {
                     
         return m;
     }
+
+
+
+    public ClienteDto EntityToDto(Cliente cliente){
+        ClienteDto cDto = new ClienteDto();
+        cDto.setId(cliente.getId());
+        cDto.setNombre(cliente.getNombre());
+        cDto.setApellido(cliente.getApellido());
+        cDto.setEmail(cliente.getEmail());
+        cDto.setId_Membresia(cliente.getMembresia().getId());
+        cDto.setUsername(cliente.getUser().getUsername());
+
+        return  cDto;
+
+    }
+
+    public Cliente DtoToEntity(ClienteDto cDto){
+        Cliente c = new Cliente(); 
+        c.setId(cDto.getId());
+        c.setNombre(cDto.getNombre());
+        c.setApellido(cDto.getApellido());
+        c.setEmail(cDto.getEmail());
+        c.setIdMembresia(cDto.getMembresiaDto().getId());
+        c.setUsername(cDto.getUsersDto().getUsername());
+        return c;
+    }
+
+
 
     public UsersDto EntityToDto(Users u){
         UsersDto uDto = new UsersDto();

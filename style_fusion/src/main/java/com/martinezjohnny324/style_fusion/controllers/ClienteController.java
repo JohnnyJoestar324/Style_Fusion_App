@@ -3,6 +3,7 @@ package com.martinezjohnny324.style_fusion.controllers;
 import com.martinezjohnny324.style_fusion.models.Cliente;
 import com.martinezjohnny324.style_fusion.models.Users;
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
+import com.martinezjohnny324.style_fusion.models.dto.UsersDto;
 import com.martinezjohnny324.style_fusion.repositories.UserRepository;
 import com.martinezjohnny324.style_fusion.services.ClienteService;
 import com.martinezjohnny324.style_fusion.services.MembresiaService;
@@ -55,21 +56,21 @@ public class ClienteController {
         clienteService.guardarCliente(cDto);
         return "redirect:/cliente/total_clientes"; // Redirecciona después de guardar
     }
- // Eliminar directamente desde la tabla
-    @PostMapping("/eliminar/{id}")
-    public String eliminarClienteDirecto(@PathVariable("id") Long id) {
-        ClienteDto cliente = clienteService.obtenerClientePorId(id);
+//  // Eliminar directamente desde la tabla
+//     @PostMapping("/eliminar/{id}")
+//     public String eliminarClienteDirecto(@PathVariable("id") Long id) {
+//         ClienteDto cliente = clienteService.obtenerClientePorId(id);
 
-        if (cliente != null) {
-            Users user = cliente.getUsers();
-            if (user != null) {
-                userRepository.delete(user);
-            }
-            clienteService.borrarCliente(id);
-        }
+//         if (cliente != null) {
+//             UsersDto user = cliente.getUsers();
+//             if (user != null) {
+//                 userRepository.delete(user);
+//             }
+//             clienteService.borrarCliente(id);
+//         }
 
-        return "redirect:/cliente/total_clientes";
-    }
+//         return "redirect:/cliente/total_clientes";
+//     }
 
 
 

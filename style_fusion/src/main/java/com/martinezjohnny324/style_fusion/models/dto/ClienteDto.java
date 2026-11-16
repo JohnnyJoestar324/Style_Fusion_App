@@ -1,6 +1,6 @@
 package com.martinezjohnny324.style_fusion.models.dto;
 
-import com.martinezjohnny324.style_fusion.models.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ClienteDto {
 
@@ -8,28 +8,40 @@ public class ClienteDto {
     private String nombre;
     private String apellido;
     private String email;
-    private MembresiaDto mDto;
-    private Users users;
+    private Long id_Membresia;
+    private String username;
+    @JsonIgnore 
+    private MembresiaDto membresiaDto;
+    @JsonIgnore 
+    private UsersDto usersDto;
+
 
     
-
-
-    public Users getUsers() {
-        return users;
+    
+    
+    public MembresiaDto getMembresiaDto() {
+        return membresiaDto;
     }
-
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setMembresiaDto(MembresiaDto membresiaDto) {
+        this.membresiaDto = membresiaDto;
     }
-
-    public ClienteDto() {
+    public UsersDto getUsersDto() {
+        return usersDto;
     }
-
-    public MembresiaDto getmDto() {
-        return mDto;
+    public void setUsersDto(UsersDto usersDto) {
+        this.usersDto = usersDto;
     }
-    public void setmDto(MembresiaDto mDto) {
-        this.mDto = mDto;
+    public Long getId_Membresia() {
+        return id_Membresia;
+    }
+    public void setId_Membresia(Long id_Membresia) {
+        this.id_Membresia = id_Membresia;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
     public Long getId() {
         return id;
@@ -39,7 +51,7 @@ public class ClienteDto {
     }
     public String getNombre() {
         return nombre;
-    }
+    } 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -55,8 +67,8 @@ public class ClienteDto {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
+      
+        
 
 
 }

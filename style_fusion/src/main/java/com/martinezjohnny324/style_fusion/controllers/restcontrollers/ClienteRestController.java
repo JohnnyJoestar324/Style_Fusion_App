@@ -21,14 +21,14 @@ public class ClienteRestController {
 
 
     @GetMapping("/Cliente_Info/{idLong}")
-    public ResponseEntity<ClienteDto>ObtenerClientePorId(@PathVariable Long idLong){
+    public ResponseEntity<ClienteDto> ObtenerClientePorId(@PathVariable Long idLong){
        ClienteDto cDto = clservice.obtenerClientePorId(idLong);
 
             if (cDto == null){
                 ResponseEntity.notFound().build();
             }
 
-        return ResponseEntity.ok(cDto);
+       return ResponseEntity.ok(cDto);
     }
     
     

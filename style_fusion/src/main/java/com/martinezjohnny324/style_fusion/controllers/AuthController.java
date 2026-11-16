@@ -18,6 +18,7 @@ public class AuthController {
     private final ClienteRepository clienteRepository;
     private final PasswordEncoder passwordEncoder;
 
+    
     public AuthController(UserRepository userRepository,
                           ClienteRepository clienteRepository,
                           PasswordEncoder passwordEncoder) {
