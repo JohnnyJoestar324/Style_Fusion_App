@@ -14,7 +14,7 @@ public class Cliente {
     private String nombre;                                                                           
 
     @Column(nullable = false)
-    private String apellido;
+    private String apellido; 
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -22,12 +22,10 @@ public class Cliente {
     @ManyToOne
     @JoinColumn(name = "membresia_id", nullable = false)
     private Membresia membresia;
-    private Long idMembresia;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Users user;
-    private String username;
 
 
     // 🔹 Constructor vacío (requerido por JPA)
@@ -82,13 +80,6 @@ public class Cliente {
         this.membresia = membresia;
     }
 
-    public Long getIdMembresia() {
-        return idMembresia;
-    }
-
-    public void setIdMembresia(Long idMembresia) {
-        this.idMembresia = idMembresia;
-    }
 
     public Users getUser() {
         return user;
@@ -98,13 +89,6 @@ public class Cliente {
         this.user = user;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
 
 

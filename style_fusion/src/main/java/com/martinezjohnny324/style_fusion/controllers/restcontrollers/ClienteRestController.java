@@ -1,9 +1,7 @@
 package com.martinezjohnny324.style_fusion.controllers.restcontrollers;
 
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
-import com.martinezjohnny324.style_fusion.repositories.ClienteRepository;
 import com.martinezjohnny324.style_fusion.services.ClienteService;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;

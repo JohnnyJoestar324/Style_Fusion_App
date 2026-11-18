@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.martinezjohnny324.style_fusion.models.Cliente;
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
@@ -15,8 +16,11 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente>listarClientes(){
-        return clienteRepository.findAll();
+    public List<ClienteDto>listarClientes(){
+
+        Mapper mp = new Mapper();
+        List<Cliente> c = clienteRepository.findAll();
+        return c.stream().map(cDto -> mp.EntityToDto(cDto)).collect(Collectors.toList());
 
     }
 

@@ -6,10 +6,19 @@ import com.martinezjohnny324.style_fusion.models.Users;
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
 import com.martinezjohnny324.style_fusion.models.dto.MembresiaDto;
 import com.martinezjohnny324.style_fusion.models.dto.UsersDto;
+import com.martinezjohnny324.style_fusion.repositories.MembresiaRepository;
+import com.martinezjohnny324.style_fusion.repositories.UserRepository;
+
 import java.util.stream.Collectors;
 
 
 public class Mapper {
+    private MembresiaRepository mRepository;
+    private UserRepository uRepository;
+
+    
+
+        
 
         public MembresiaDto EntityToDto(Membresia memb){
         MembresiaDto mDto = new MembresiaDto();
@@ -47,9 +56,13 @@ public class Mapper {
         cDto.setNombre(cliente.getNombre());
         cDto.setApellido(cliente.getApellido());
         cDto.setEmail(cliente.getEmail());
-        cDto.setId_Membresia(cliente.getMembresia().getId());
-        cDto.setUsername(cliente.getUser().getUsername());
-
+        if(cliente.getMembresia()!=null){
+            cDto.setId_Membresia(cliente.getMembresia().getId());
+            cDto.setNombrePlan(cliente.getMembresia().getNombrePlan());
+        }
+        if(cliente.getUser()!=null){
+            cDto.setId_user(cliente.getUser().getId());
+        }
         return  cDto;
 
     }
@@ -60,8 +73,18 @@ public class Mapper {
         c.setNombre(cDto.getNombre());
         c.setApellido(cDto.getApellido());
         c.setEmail(cDto.getEmail());
-        c.setIdMembresia(cDto.getMembresiaDto().getId());
-        c.setUsername(cDto.getUsersDto().getUsername());
+        if(cDto.getId_Membresia() != null){
+            Membresia m = new Membresia();
+            m.setId(cDto.getId_Membresia());
+        c.setMembresia(m);
+        }
+        
+        if(cDto.getId_user() != null){
+            Users u = new Users();
+            u.setId(cDto.getId_user());
+        c.setUser(u);    
+        } 
+
         return c;
     }
 

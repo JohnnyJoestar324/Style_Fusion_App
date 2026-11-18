@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <div class="card p-4">
                     <h2 class="text-center mb-4">Registrar nuevo cliente</h2>
-                    <form th:action="@{/cliente/guardar}" th:object="${cliente}" method="post">
+                    <form th:action="@{/cliente/guardar}" th:object="${cliente}" method="post" onsubmit="this.querySelector('button[type=submit]').disable=true;">
                         
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre:</label>
@@ -43,11 +43,11 @@
 
                         <div class="mb-4">
                             <label for="membresia" class="form-label">Membresía:</label>
-                            <select th:field="*{membresia}" id="membresia" class="form-select" required>
+                            <select th:field="*{id_Membresia}" id="membresia" class="form-select" required>
                                 <option th:each="m : ${membresias}" 
                                         th:value="${m.id}" 
                                         th:text="${m.nombrePlan}">
-                                    Selecciona un plan
+                                    Selecciona un plan 
                                 </option>
                             </select>
                         </div>

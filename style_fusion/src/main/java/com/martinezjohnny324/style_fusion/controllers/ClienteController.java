@@ -1,7 +1,6 @@
 package com.martinezjohnny324.style_fusion.controllers;
 
 import com.martinezjohnny324.style_fusion.models.Cliente;
-import com.martinezjohnny324.style_fusion.models.Users;
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
 import com.martinezjohnny324.style_fusion.models.dto.UsersDto;
 import com.martinezjohnny324.style_fusion.repositories.UserRepository;
@@ -39,22 +38,29 @@ public class ClienteController {
     // 1. Mostrar lista de clientes (Endpoint /clientes/total_clientes)
     @GetMapping("/total_clientes")
     public String obtenerTotalClientes(Model model) { // Debe devolver String para la vista
-        List<Cliente> clientes = clienteService.listarClientes();
-        model.addAttribute("cliente", clientes);
+        List<ClienteDto> clientes = clienteService.listarClientes();
+        model.addAttribute("clientes", clientes);
         return "cliente/total_clientes"; // Nombre de la vista (ruta templates/cliente/total_clientes.html)
     }
 
     // 2. Mostrar formulario de nuevo cliente (Endpoint /clientes/nuevo)
     @GetMapping("/nuevo")
     public String nuevoCliente(Model model){
-        model.addAttribute("cliente", new Cliente());
+        model.addAttribute("cliente", new ClienteDto());
         model.addAttribute("membresias", membresiaService.listarMembresias());
         return "cliente/nuevo"; 
     }
     @PostMapping("/guardar") 
     public String guardarClientes(@ModelAttribute("cliente") ClienteDto cDto){
-        clienteService.guardarCliente(cDto);
-        return "redirect:/cliente/total_clientes"; // Redirecciona después de guardar
+
+    System.out.println("====== GUARDANDO CLIENTE ======");
+    System.out.println("ID: " + cDto.getId());
+    System.out.println("EMAIL: " + cDto.getEmail());
+    System.out.println("MEMBRESIA: " + cDto.getId_Membresia());
+    System.out.println("USER: " + cDto.getId_user());
+
+    clienteService.guardarCliente(cDto);
+    return "redirect:/cliente/total_clientes"; // Redirecciona después de guardar
     }
 //  // Eliminar directamente desde la tabla
 //     @PostMapping("/eliminar/{id}")
@@ -62,9 +68,9 @@ public class ClienteController {
 //         ClienteDto cliente = clienteService.obtenerClientePorId(id);
 
 //         if (cliente != null) {
-//             UsersDto user = cliente.getUsers();
+//             UsersDto user = cliente.getUsersDto();
 //             if (user != null) {
-//                 userRepository.delete(user);
+//                 userRepository.deleteById(id);
 //             }
 //             clienteService.borrarCliente(id);
 //         }
@@ -88,7 +94,7 @@ public class ClienteController {
     
 
 // @PostMapping("/editar")
-//     public String editarCliente(@ModelAttribute("cliente") Cliente cliente,
+//     public String editarCliente(@ModelAttribute("cliente") ClienteDto cliente,
 //                                 @RequestParam(value = "membresiaId", required = false) Long membresiaId) {
 
 //         if (cliente.getId() == null) {
@@ -110,7 +116,7 @@ public class ClienteController {
 //         // Actualizar membresía si se envió
 //         if (membresiaId != null) {
 //             var membresia = membresiaService.obtenerMembresiaPorId(membresiaId);
-//             clienteExistente.setmDto(membresia);
+//             clienteExistente.setId_Membresia(membresiaId);(membresia);
 //         }
 
 //         clienteService.guardarCliente(clienteExistente);
