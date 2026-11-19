@@ -1,9 +1,7 @@
 package com.martinezjohnny324.style_fusion.controllers;
 
-import com.martinezjohnny324.style_fusion.models.Cliente;
-import com.martinezjohnny324.style_fusion.models.Users;
+
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
-import com.martinezjohnny324.style_fusion.models.dto.UsersDto;
 import com.martinezjohnny324.style_fusion.repositories.UserRepository;
 import com.martinezjohnny324.style_fusion.services.ClienteService;
 import com.martinezjohnny324.style_fusion.services.MembresiaService;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clientes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+        h2 {
+            color: #333;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Lista de membresias disponibles</h2>
+                        <a th:href="@{/cliente/nuevo}" class="btn btn-success">Nuevo Cliente</a>
+                    </div>
+                    <div class="table-container">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre del Plan</th>
+                                    <th>Descripcion</th>
+                                    <th>Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="lm : ${Lista_Membresia}">
+                                    <td th:text="${lm.id}"></td>
+                                    <td th:text="${lm.nombrePlan}"></td>
+                                    <td th:text="${lm.descripcion}"></td>
+                                    <td th:text="${lm.precio}"></td>
+                                    
