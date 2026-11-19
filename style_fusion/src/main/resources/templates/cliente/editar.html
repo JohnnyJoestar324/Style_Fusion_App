@@ -39,7 +39,7 @@
 
                     <div class="mb-3">
                         <label for="membresia" class="form-label">Membresía</label>
-                        <select th:field="*{membresia}" class="form-select" id="membresia">
+                        <select th:field="*{id_Membresia}" class="form-select" id="membresia">
                             <option th:each="m : ${membresias}" 
                                     th:value="${m.id}" 
                                     th:text="${m.nombrePlan}">

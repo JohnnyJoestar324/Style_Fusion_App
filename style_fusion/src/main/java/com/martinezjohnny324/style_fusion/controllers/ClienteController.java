@@ -1,6 +1,7 @@
 package com.martinezjohnny324.style_fusion.controllers;
 
 import com.martinezjohnny324.style_fusion.models.Cliente;
+import com.martinezjohnny324.style_fusion.models.Users;
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
 import com.martinezjohnny324.style_fusion.models.dto.UsersDto;
 import com.martinezjohnny324.style_fusion.repositories.UserRepository;
@@ -62,66 +63,65 @@ public class ClienteController {
     clienteService.guardarCliente(cDto);
     return "redirect:/cliente/total_clientes"; // Redirecciona después de guardar
     }
-//  // Eliminar directamente desde la tabla
-//     @PostMapping("/eliminar/{id}")
-//     public String eliminarClienteDirecto(@PathVariable("id") Long id) {
-//         ClienteDto cliente = clienteService.obtenerClientePorId(id);
+ // Eliminar directamente desde la tabla
+    @PostMapping("/eliminar/{id}")
+    public String eliminarClienteDirecto(@PathVariable("id") Long id) {
+        ClienteDto cliente = clienteService.obtenerClientePorId(id);
 
-//         if (cliente != null) {
-//             UsersDto user = cliente.getUsersDto();
-//             if (user != null) {
-//                 userRepository.deleteById(id);
-//             }
-//             clienteService.borrarCliente(id);
-//         }
+        if (cliente != null) {
+            Long user = cliente.getId_user();
+            if (user != null) {
+                userRepository.deleteById(id);
+            }
+            clienteService.borrarCliente(id);
+        }
 
-//         return "redirect:/cliente/total_clientes";
-//     }
+        return "redirect:/cliente/total_clientes";
+    }
 
 
 
-// @GetMapping("/editar/{id}")
-// public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
-//     ClienteDto cDto = clienteService.obtenerClientePorId(id);
-//     if (cDto == null) {
-//         throw new RuntimeException("Cliente no encontrado con ID: " + id);
-//     }
+@GetMapping("/editar/{id}")
+public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
+    ClienteDto cDto = clienteService.obtenerClientePorId(id);
+    if (cDto == null) {
+        throw new RuntimeException("Cliente no encontrado con ID: " + id);
+    }
 
-//     model.addAttribute("cliente", cDto);
-//     model.addAttribute("membresias", membresiaService.listarMembresias());
-//     return "cliente/editar"; // nombre del HTML del formulario de edición
-// }
+    model.addAttribute("cliente", cDto);
+    model.addAttribute("membresias", membresiaService.listarMembresias());
+    return "cliente/editar"; // nombre del HTML del formulario de edición
+}
     
 
-// @PostMapping("/editar")
-//     public String editarCliente(@ModelAttribute("cliente") ClienteDto cliente,
-//                                 @RequestParam(value = "membresiaId", required = false) Long membresiaId) {
+@PostMapping("/editar")
+    public String editarCliente(@ModelAttribute("cliente") ClienteDto cliente) {
 
-//         if (cliente.getId() == null) {
-//             throw new IllegalArgumentException("El ID del cliente no puede ser nulo.");
-//         }
+        if (cliente.getId() == null) {
+            throw new IllegalArgumentException("El ID del cliente no puede ser nulo.");
+        }
 
-//         // Buscar cliente existente
-//         ClienteDto clienteExistente = clienteService.obtenerClientePorId(cliente.getId());
-//         if (clienteExistente == null) {
-//             throw new RuntimeException("Cliente no encontrado con ID: " + cliente.getId());
-//         }
+        // Buscar cliente existente
+        ClienteDto clienteExistente = clienteService.obtenerClientePorId(cliente.getId());
+        if (clienteExistente == null) {
+            throw new RuntimeException("Cliente no encontrado con ID: " + cliente.getId());
+        }
 
-//         // Actualizar campos
-//         clienteExistente.setId(cliente.getId());
-//         clienteExistente.setNombre(cliente.getNombre());
-//         clienteExistente.setApellido(cliente.getApellido());
-//         clienteExistente.setEmail(cliente.getEmail());
+        // Actualizar campos
+        clienteExistente.setId(cliente.getId());
+        clienteExistente.setNombre(cliente.getNombre());
+        clienteExistente.setApellido(cliente.getApellido());
+        clienteExistente.setEmail(cliente.getEmail());
 
-//         // Actualizar membresía si se envió
-//         if (membresiaId != null) {
-//             var membresia = membresiaService.obtenerMembresiaPorId(membresiaId);
-//             clienteExistente.setId_Membresia(membresiaId);(membresia);
-//         }
+        // Actualizar membresía si se envió
+        if (cliente.getId_Membresia() != null) {
+            // var membresia = membresiaService.obtenerMembresiaPorId(membresiaId);
+            clienteExistente.setId_Membresia(cliente.getId_Membresia()); 
+        }
 
-//         clienteService.guardarCliente(clienteExistente);
-//         return "redirect:/cliente/total_clientes";
-//     }
+        clienteService.guardarCliente(clienteExistente);
+        return "redirect:/cliente/total_clientes";
+    }
 
 
     

@@ -1,7 +1,4 @@
 package com.martinezjohnny324.style_fusion.models.dto;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class ClienteDto {
 
     private Long id;
