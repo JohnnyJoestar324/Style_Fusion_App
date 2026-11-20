@@ -2,6 +2,7 @@ package com.martinezjohnny324.style_fusion.controllers;
 
 
 import com.martinezjohnny324.style_fusion.models.dto.ClienteDto;
+import com.martinezjohnny324.style_fusion.repositories.ClienteRepository;
 import com.martinezjohnny324.style_fusion.repositories.UserRepository;
 import com.martinezjohnny324.style_fusion.services.ClienteService;
 import com.martinezjohnny324.style_fusion.services.MembresiaService;
@@ -14,15 +15,17 @@ import java.util.List;
 @RequestMapping("/cliente")
 public class ClienteController {
 
+    private final ClienteRepository clienteRepository;
     private final ClienteService clienteService;
     private final MembresiaService membresiaService;
     private final UserRepository userRepository;
 
     // Constructor con inyección
-     public  ClienteController(ClienteService clienteService, MembresiaService membresiaService, UserRepository userRepository) {
+     public  ClienteController(ClienteService clienteService, MembresiaService membresiaService, UserRepository userRepository, ClienteRepository clienteRepository) {
         this.clienteService = clienteService;
         this.membresiaService = membresiaService;
         this.userRepository = userRepository;
+        this.clienteRepository = clienteRepository;
     }
 
 
@@ -64,15 +67,7 @@ public class ClienteController {
  // Eliminar directamente desde la tabla
     @PostMapping("/eliminar/{id}")
     public String eliminarClienteDirecto(@PathVariable("id") Long id) {
-        ClienteDto cliente = clienteService.obtenerClientePorId(id);
-
-        if (cliente != null) {
-            Long user = cliente.getId_user();
-            if (user != null) {
-                userRepository.deleteById(id);
-            }
-            clienteService.borrarCliente(id);
-        }
+       clienteService.borrarCliente(id);
 
         return "redirect:/cliente/total_clientes";
     }

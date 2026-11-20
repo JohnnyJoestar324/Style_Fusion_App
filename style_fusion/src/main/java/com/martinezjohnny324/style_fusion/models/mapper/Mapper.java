@@ -56,6 +56,7 @@ public class Mapper {
         cDto.setNombre(cliente.getNombre());
         cDto.setApellido(cliente.getApellido());
         cDto.setEmail(cliente.getEmail());
+        cDto.setFechaRegistro(cliente.getFechaRegistro());
         if(cliente.getMembresia()!=null){
             cDto.setId_Membresia(cliente.getMembresia().getId());
             cDto.setNombrePlan(cliente.getMembresia().getNombrePlan());
@@ -73,6 +74,7 @@ public class Mapper {
         c.setNombre(cDto.getNombre());
         c.setApellido(cDto.getApellido());
         c.setEmail(cDto.getEmail());
+        c.setFechaRegistro(cDto.getFechaRegistro());
         if(cDto.getId_Membresia() != null){
             Membresia m = new Membresia();
             m.setId(cDto.getId_Membresia());

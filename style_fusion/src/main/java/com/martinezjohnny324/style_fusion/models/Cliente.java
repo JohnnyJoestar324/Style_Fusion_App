@@ -1,5 +1,7 @@
 package com.martinezjohnny324.style_fusion.models;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +21,9 @@ public class Cliente {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column (name = "fecha_registro", nullable = true)
+    private LocalDate fechaRegistro;
+
     @ManyToOne
     @JoinColumn(name = "membresia_id", nullable = false)
     private Membresia membresia;
@@ -33,10 +38,11 @@ public class Cliente {
     }
 
     // 🔹 Constructor con parámetros
-    public Cliente(String nombre, String apellido, String email, Membresia membresia) {
+    public Cliente(String nombre, String apellido, String email, LocalDate fechaRegistro, Membresia membresia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.fechaRegistro = fechaRegistro;
         this.membresia = membresia;
     }
 
@@ -72,6 +78,8 @@ public class Cliente {
         this.email = email;
     }
 
+    
+
     public Membresia getMembresia() {
         return membresia;
     }
@@ -87,6 +95,14 @@ public class Cliente {
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
 

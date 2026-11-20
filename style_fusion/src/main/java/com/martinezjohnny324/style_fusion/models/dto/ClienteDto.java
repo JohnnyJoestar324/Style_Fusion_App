@@ -1,15 +1,20 @@
 package com.martinezjohnny324.style_fusion.models.dto;
+
+import java.time.LocalDate;
+
 public class ClienteDto {
 
     private Long id;
     private String nombre;
     private String apellido;
     private String email;
+    private LocalDate fechaRegistro;
     private Long id_Membresia;
     private String username;
     private Long id_user;
     private String nombrePlan;
      
+    
     
     public Long getId() {
         return id;
@@ -58,6 +63,12 @@ public class ClienteDto {
     }
     public void setNombrePlan(String nombrePlan) {
         this.nombrePlan = nombrePlan;
+    }
+    public LocalDate getFechaRegistro() {
+        return fechaRegistro;
+    }
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
     
     
