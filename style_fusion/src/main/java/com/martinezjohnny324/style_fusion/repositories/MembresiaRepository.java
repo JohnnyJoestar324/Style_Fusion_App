@@ -19,7 +19,8 @@ public interface MembresiaRepository extends JpaRepository<Membresia, Long> {
         SELECT new com.martinezjohnny324.style_fusion.models.dto.ReporteDto(
             m.nombrePlan,
             COUNT(c.id),
-            CAST(COALESCE(SUM(m.precio), 0) AS BigDecimal)
+            CAST(COALESCE(COUNT(c.id) * m.precio, 0) AS BigDecimal)
+            SELECT 
         )
         FROM Membresia m
         LEFT JOIN m.clientes c
@@ -33,7 +34,7 @@ public interface MembresiaRepository extends JpaRepository<Membresia, Long> {
         SELECT new com.martinezjohnny324.style_fusion.models.dto.ReporteDto(
             m.nombrePlan,
             Count(c.id),
-            CAST(COALESCE(SUM(m.precio),0) AS BigDecimal)
+            CAST(COALESCE(COUNT(c.id) * m.precio, 0) AS BigDecimal)
         )
             FROM Membresia m
             LEFT JOIN m.clientes c

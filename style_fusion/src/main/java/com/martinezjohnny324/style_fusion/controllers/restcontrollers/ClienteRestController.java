@@ -29,10 +29,4 @@ public class ClienteRestController {
        return ResponseEntity.ok(cDto);
     }
     
-    
-    
-    
-
-
-
 }
