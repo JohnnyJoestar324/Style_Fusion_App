@@ -38,7 +38,7 @@ public interface MembresiaRepository extends JpaRepository<Membresia, Long> {
         )
             FROM Membresia m
             LEFT JOIN m.clientes c
-                WHERE c.id IS NULL OR c.fechaRegistro BETWEEN :fechaInicio AND :fechaFin
+                WHERE c.fechaRegistro BETWEEN :fechaInicio AND :fechaFin
             GROUP BY m.id, m.nombrePlan, m.precio
             ORDER BY COUNT(c.id) DESC
         

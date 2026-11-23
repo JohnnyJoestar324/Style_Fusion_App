@@ -3,9 +3,14 @@ package com.martinezjohnny324.style_fusion.controllers;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.mockito.cglib.core.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping; 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.martinezjohnny324.style_fusion.models.dto.MembresiaDto;
 import com.martinezjohnny324.style_fusion.models.dto.ReporteDto;
 import com.martinezjohnny324.style_fusion.services.MembresiaService;
@@ -48,11 +53,14 @@ public class MembresiaController {
    }
 
    @GetMapping("/reportes_por_fechas")
-   public String reportesPorFecha(Model model, LocalDate in, LocalDate fn){
-    List<ReporteDto> report = membresiaService.ReporteIngresosPorFecha(in, in);
+   public String reportesPorFecha(Model model, @RequestParam(required = false) @DateTimeFormat (iso = DateTimeFormat.ISO.DATE)LocalDate fechaInicio,
+                                    @RequestParam(required = false) @DateTimeFormat (iso = DateTimeFormat.ISO.DATE)LocalDate fechaFinal){
+    List<ReporteDto> report = membresiaService.ReporteIngresosPorFecha(fechaInicio, fechaFinal);
     BigDecimal totalGerneral = membresiaService.calcularTotalGeneral(report);
 
     model.addAttribute("reporte", report);
+    model.addAttribute("fechaInicio", fechaInicio);
+    model.addAttribute("fechaFinal", fechaFinal);
     model.addAttribute("totalGeneral", totalGerneral);
 
     return  "membresia/reportes_por_fechas";

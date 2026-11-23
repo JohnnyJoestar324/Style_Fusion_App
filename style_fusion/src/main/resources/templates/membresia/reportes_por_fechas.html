@@ -26,12 +26,12 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label for="fechaFin" class="form-label">Fecha fin</label>
+                    <label for="fechaFin" class="form-label">Fecha final</label>
                     <input type="date"
-                           id="fechaFin"
-                           name="fechaFin"
+                           id="fechaFinal"
+                           name="fechaFinal"
                            class="form-control"
-                           th:value="${fechaFin != null ? #temporals.format(fechaFin, 'yyyy-MM-dd') : ''}">
+                           th:value="${fechaFinal != null ? #temporals.format(fechaFinal, 'yyyy-MM-dd') : ''}">
                 </div>
 
                 <div class="col-md-4 d-flex gap-2">
