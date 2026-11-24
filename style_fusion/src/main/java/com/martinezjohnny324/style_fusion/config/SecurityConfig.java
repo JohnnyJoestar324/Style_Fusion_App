@@ -27,10 +27,22 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/images/**","/auth","/auth/registro", "/login/**", "/css/**", "/js/**").permitAll() // acceso libre
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/cliente/**").hasAnyRole("ADMIN", "CLIENTE")
-                .requestMatchers("/barbero/**").hasAnyRole("CLIENTE") // Acceso solo para los clientes de Style Fusion
+                .requestMatchers("/home/").hasRole("ADMIN")
+                .requestMatchers("/membresia/**").hasRole("ADMIN")
+                .requestMatchers("/cliente/**").hasAnyRole("ADMIN")
+                .requestMatchers("/home_negocio").hasRole("CLIENTE")
+                .requestMatchers("/barbero/**").hasAnyRole("CLIENTE")
+                .requestMatchers("/cliente-barbero/**").hasAnyRole("CLIENTE")
                 .anyRequest().authenticated()
+                
             )
+
+            .exceptionHandling(ex -> ex
+                .accessDeniedPage("/Acceso_Denegado")
+             )
+        
+
+
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
