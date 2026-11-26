@@ -11,15 +11,23 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Panel de Administración</a>
-        <div class="d-flex align-items-center">
-            
-            <span class="text-white me-3" sec:authentication="name">
-                
-            </span>
-          
-            <form th:action="@{/logout}" method="post" class="mb-0">
-                <button type="submit" class="btn btn-outline-light btn-sm">Cerrar sesión</button>
-            </form>
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2 me-3" sec:authorize="isAuthenticated()">
+                <span class="badge rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center fw-semibold"
+                      style="width: 32px; height: 32px;"
+                      th:text="${#strings.toUpperCase(#strings.substring(#authentication.name, 0, 1))}">
+                    
+                </span>
+                <span class="text-light fw-medium" sec:authentication="name"></span>
+            </div>
+            <div class="d-flex gap-2">
+                <form th:action="@{/logout}" method="post" class="mb-0">
+                    <button type="submit" class="btn btn-outline-light btn-sm">Cerrar sesión</button>
+                </form>
+                <form th:action="@{/home}" method="get" class="mb-0">
+                    <button type="submit" class="btn btn-outline-light btn-sm">Volver al inicio</button>
+                </form>
+            </div>
         </div>
     </nav>
     </div>

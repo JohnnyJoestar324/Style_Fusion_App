@@ -66,12 +66,15 @@
         <a class="navbar-brand fw-bold text-white" th:href="@{/}">Style Fusion</a>
 
         <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center gap-2 me-3" sec:authorize="isAuthenticated()">
+                    <span class="badge rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center fw-semibold"
+                      style="width: 32px; height: 32px;"
+                      th:text="${#strings.toUpperCase(#strings.substring(#authentication.name, 0, 1))}">
+                    
+                    </span>
             
-            <span class="text-white me-3" sec:authentication="name">
-                
-            </span>
-
-          
+                    <span class="text-white me-3" sec:authentication="name"></span>
+                </div>
             <form th:action="@{/logout}" method="post" class="mb-0">
                 <button type="submit" class="btn btn-outline-light btn-sm">Cerrar sesión</button>
             </form>
