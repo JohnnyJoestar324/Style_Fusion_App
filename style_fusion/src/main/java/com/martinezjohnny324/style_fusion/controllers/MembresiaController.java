@@ -3,18 +3,18 @@ package com.martinezjohnny324.style_fusion.controllers;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-
-import org.mockito.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.martinezjohnny324.style_fusion.models.dto.MembresiaDto;
 import com.martinezjohnny324.style_fusion.models.dto.ReporteDto;
 import com.martinezjohnny324.style_fusion.services.MembresiaService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -66,6 +66,38 @@ public class MembresiaController {
     return  "membresia/reportes_por_fechas";
    }
 
+   @GetMapping("/editar_membresia/{id}")
+   public String formularioMembresia(Model model, @PathVariable("id") Long id){
+    MembresiaDto mDto = membresiaService.obtenerMembresiaPorId(id);
+    if (mDto == null) {
+        throw new RuntimeException("Membresia no encontrada: " + id);
+    }
+    model.addAttribute("membresia", mDto);
+    return "membresia/editar_membresia";
+   }
+
+   @PostMapping("/editar_membresia")
+   public String editarCliente (@ModelAttribute ("membresia") MembresiaDto mDto){
+
+    if (mDto != null) {
+        
+        MembresiaDto existente = membresiaService.obtenerMembresiaPorId(mDto.getId());
+
+        if (existente == null) {
+            throw new RuntimeException("Cliente no encontrado con ID: " + mDto.getId());
+        }
+
+        existente.setId(mDto.getId());
+        existente.setDescripcion(mDto.getDescripcion());
+        existente.setPrecio(mDto.getPrecio());
+
+        membresiaService.guardarMembresia(existente);
+
+    }
+    
+    return "redirect:/membresia/membresias_disponibles";
+
+   }
 
 
 }
