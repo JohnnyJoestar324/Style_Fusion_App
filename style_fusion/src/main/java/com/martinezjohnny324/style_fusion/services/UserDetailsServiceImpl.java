@@ -25,11 +25,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // 1. Buscar al usuario en la base de datos
         Users user = usersRepository.findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+            boolean enabled = true;
+            boolean accountNonExpired = true;
+            boolean credentialsNonExpired = true;
+            boolean acccountNonLocked = user.isAcccountNonLocked();
         
         // 2. Convertir tu objeto Users a un objeto UserDetails que Spring Security entiende
         return new org.springframework.security.core.userdetails.User(
             user.getUsername(),
-            user.getPassword(), // ¡La contraseña encriptada!
+            user.getPassword(), // La contraseña encriptada
+            enabled,
+            accountNonExpired,
+            credentialsNonExpired,
+            acccountNonLocked,
             Collections.singletonList(new SimpleGrantedAuthority(user.getRole()))
         );
     }

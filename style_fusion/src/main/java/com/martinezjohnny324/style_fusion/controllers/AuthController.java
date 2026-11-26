@@ -38,20 +38,21 @@ public class AuthController {
     @PostMapping("/registro")
     public String registrarUsuario(@ModelAttribute("user") Users user, Model model) {
 
-        // 1️⃣ Verificar si el cliente existe en la base de datos
+        // Verificar si el cliente existe en la base de datos
         Cliente cliente = clienteRepository.findByEmail(user.getEmail());
         if (cliente == null) {
             model.addAttribute("error", "No estás registrado como cliente. Contacta al administrador.");
             return "login/registro";
         }
 
-        // 2️⃣ Verificar si el nombre de usuario ya existe
+        //  Verificar si el nombre de usuario ya existe
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             model.addAttribute("error", "El nombre de usuario ya está en uso.");
             return "login/registro";
         }
 
-        // 3️⃣ Registrar al usuario con rol CLIENTE
+        //  Registrar al usuario con rol CLIENTE
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("ROLE_CLIENTE");
         userRepository.save(user);

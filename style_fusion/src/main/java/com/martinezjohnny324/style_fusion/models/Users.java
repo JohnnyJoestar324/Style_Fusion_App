@@ -22,7 +22,25 @@ public class Users {
     @Column(unique = true)
     private String email;
     private String password;
-    private String role; 
+    private String role;
+    private boolean acccountNonLocked = true;
+    private LocalDateTime lockTime;
+
+    public boolean isAcccountNonLocked() {
+        return acccountNonLocked;
+    }
+
+    public void setAcccountNonLocked(boolean acccountNonLocked) {
+        this.acccountNonLocked = acccountNonLocked;
+    }
+
+    public LocalDateTime getLockTime() {
+        return lockTime;
+    }
+
+    public void setLockTime(LocalDateTime lockTime) {
+        this.lockTime = lockTime;
+    }
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
