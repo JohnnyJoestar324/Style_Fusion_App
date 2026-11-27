@@ -96,6 +96,12 @@
             <div th:if="${param.error}" class="error-message">
                 Credenciales incorrectas.
             </div>
+
+            <div th:if="${param.locked}" class="alert alert-danger">
+                Tu cuenta esta bloqueada por intentos fallidos. Espera un momento o contacata al administrador
+            </div>
+
+
         </form>
 
         <!-- Enlace al registro -->

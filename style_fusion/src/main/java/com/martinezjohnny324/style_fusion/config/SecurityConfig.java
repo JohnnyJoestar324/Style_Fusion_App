@@ -22,7 +22,7 @@ public class SecurityConfig {
 
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomLoginFailureHandler customLoginFailureHandler, CustomLoginSuccessHandler customLoginSuccessHandler) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/images/**","/auth","/auth/registro", "/login/**", "/css/**", "/js/**").permitAll() // acceso libre
@@ -46,7 +46,9 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
+                .failureHandler(customLoginFailureHandler)
                 .successHandler((HttpServletRequest request, HttpServletResponse response, Authentication authentication) -> {
+                        customLoginSuccessHandler.resetFailedAttempts(authentication.getName());
                     Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
                     String redirectURL = request.getContextPath();
 

@@ -25,6 +25,16 @@ public class Users {
     private String role;
     private boolean acccountNonLocked = true;
     private LocalDateTime lockTime;
+    private int failedAttempts = 0;
+    
+
+    public int getFailedAttempts() {
+        return failedAttempts;
+    }
+
+    public void setFailedAttempts(int failedAttempts) {
+        this.failedAttempts = failedAttempts;
+    }
 
     public boolean isAcccountNonLocked() {
         return acccountNonLocked;
